@@ -1,0 +1,38 @@
+.menuIcon {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  
+  .navMenu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+  }
+  
+  .navMenu.active {
+    left: 0;
+  }
+  
+  .navMenu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .navMenu li {
+    margin: 20px 0;
+  }
+  
+  .navMenu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+  
