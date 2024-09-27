@@ -1,206 +1,334 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Phone,
+  ChevronRight,
+  Sun,
+  Moon,
+} from "lucide-react";
 import SlidingMenu from "@/components/SlidingMenu";
 
-import { ModeToggle } from "@/components/ui/ModeToggle";
+export default function CVPage() {
+  const [darkMode, setDarkMode] = useState(false);
 
-import { Github, Linkedin, Mail, Phone } from "lucide-react";
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem("darkMode") === "true";
+    setDarkMode(isDarkMode);
+  }, []);
 
-export default function Component() {
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkMode.toString());
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <ModeToggle />
+    <div
+      className={`min-h-screen flex flex-col items-center justify-start p-4 overflow-hidden transition-colors duration-500 ${
+        darkMode
+          ? "bg-gray-900 text-white"
+          : "bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 text-gray-900"
+      }`}
+    >
+      <motion.div
+        className="absolute inset-0 z-0"
+        animate={{
+          background: darkMode
+            ? [
+                "linear-gradient(to right, #2d3748, #1a202c)",
+                "linear-gradient(to right, #4a5568, #2d3748)",
+                "linear-gradient(to right, #1a202c, #2d3748)",
+              ]
+            : [
+                "linear-gradient(to right, #ff9a9e, #fad0c4)",
+                "linear-gradient(to right, #a18cd1, #fbc2eb)",
+                "linear-gradient(to right, #ffecd2, #fcb69f)",
+              ],
+        }}
+        transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
+      />
+
       <SlidingMenu />
 
-      <div className="max-w-4xl mx-auto">
-        <Card className="mb-8">
-          <CardHeader>
-            <div className="flex justify-between items-start">
-              <div>
-                <CardTitle className="text-3xl font-bold">
-                  Christie Netto
-                </CardTitle>
-                <p className="text-gray-500">
-                  Computer and Data Science Student
-                </p>
-              </div>
-              <img
-                src="/placeholder.svg?height=100&width=100"
-                alt="Christie Netto"
-                className="rounded-full w-24 h-24 object-cover"
-              />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-4 mb-4">
-              <Button variant="outline" size="sm" asChild>
-                <a
-                  href="mailto:christienetto@gmail.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Mail className="mr-2 h-4 w-4" />
-                  christienetto@gmail.com
-                </a>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <a href="tel:+358442363773">
-                  <Phone className="mr-2 h-4 w-4" />
-                  (+358) 442363773
-                </a>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <a
-                  href="https://github.com/christienetto"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Github className="mr-2 h-4 w-4" />
-                  github.com/christienetto
-                </a>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <a
-                  href="https://www.linkedin.com/in/christie-netto-a50765318"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Linkedin className="mr-2 h-4 w-4" />
-                  LinkedIn Profile
-                </a>
-              </Button>
-            </div>
-            <p className="text-gray-700 mb-4">
-              Looking for exciting new opportunities! I love leadership roles
-              and am eagerly after them as I love taking on responsibility and
-              delivering a good result as a team. I love bouldering, swimming,
-              have played the piano and guitar for 5 years, and occasionally
-              make YouTube music videos. I have a drivers license and a
-              hygienepass :))
-            </p>
-          </CardContent>
-        </Card>
+      <motion.button
+        className={`fixed top-4 right-4 p-2 rounded-full z-20 ${
+          darkMode ? "bg-gray-700" : "bg-white bg-opacity-20"
+        }`}
+        onClick={toggleDarkMode}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        {darkMode ? (
+          <Sun className="text-yellow-300" />
+        ) : (
+          <Moon className="text-gray-800" />
+        )}
+      </motion.button>
 
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">
-              Work Experience
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-semibold">
-                  Tenant Committee Chair
-                </h3>
-                <p className="text-gray-500">
-                  HOAS | Aug 2024 - Current | Helsinki, Finland
-                </p>
-                <ul className="list-disc list-inside mt-2 text-gray-700">
-                  <li>Organizing Events</li>
-                  <li>Financing</li>
-                  <li>Leadership skills</li>
-                  <li>Maintaining relations with tenants</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">Senior Producer</h3>
-                <p className="text-gray-500">
-                  Kumpulan Speksi | Jun 2024 - Jun 2025 | Helsinki, Finland
-                </p>
-                <ul className="list-disc list-inside mt-2 text-gray-700">
-                  <li>
-                    Managing a team, leadership, communication, and delegation
-                    of work
-                  </li>
-                  <li>
-                    Producing, marketing, financing, organizing venues and
-                    sponsorship
-                  </li>
-                  <li>Google calendar, Telegram, and Excel</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">
-                  F2F Fundraising as a Travelling Salesman
-                </h3>
-                <p className="text-gray-500">
-                  Pelastakaa Lapset | Aug 2023 - Jan 2024 | Helsinki, Finland
-                </p>
-                <ul className="list-disc list-inside mt-2 text-gray-700">
-                  <li>Public Speaking and self-confidence</li>
-                  <li>Persuasiveness, determination, and tenacity</li>
-                  <li>Communication, sales, and entrepreneurship</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">
-                  Acting as Side Character in 'Lovi' TV drama series
-                </h3>
-                <p className="text-gray-500">
-                  Yellow Films | Jul 2022 - Aug 2022 | Helsinki, Finland
-                </p>
-                <p className="mt-2 text-gray-700">
-                  Played the side character role in the series 'Lovi'. My
-                  character name was Lin and I played the main character's
-                  schoolmate. Also worked as a background actor in 3 series.
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="container mx-auto px-4 py-16 z-10">
+        <motion.header
+          className="text-center mb-16"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100 }}
+        >
+          <h1 className="text-4xl font-bold mb-4">Christie Netto</h1>
+          <p
+            className={`text-xl ${
+              darkMode ? "text-gray-300" : "text-gray-100"
+            }`}
+          >
+            Computer and Data Science Student | Aspiring Leader
+          </p>
+        </motion.header>
 
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">Education</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-lg font-semibold">
-                  Bachelor's in Computer and Data Science
-                </h3>
-                <p className="text-gray-500">
-                  University of Helsinki | Sep 2022 - Current
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 100, delay: 0.1 }}
+          >
+            <Card
+              className={
+                darkMode
+                  ? "bg-gray-800 text-white"
+                  : "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg"
+              }
+            >
+              <CardContent className="p-6">
+                <h2 className="text-2xl font-semibold mb-4">About Me</h2>
+                <p
+                  className={`${
+                    darkMode ? "text-gray-300" : "text-gray-800"
+                  } mb-4`}
+                >
+                  I'm a passionate Computer and Data Science student at the
+                  University of Helsinki, eagerly seeking new opportunities. I
+                  thrive in leadership roles, taking on responsibilities and
+                  delivering excellent results as part of a team.
                 </p>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">
-                  International Baccalaureate
-                </h3>
-                <p className="text-gray-500">
-                  Joensuun lyseon lukio | Aug 2019 - Jun 2022
+                <p
+                  className={`${
+                    darkMode ? "text-gray-300" : "text-gray-800"
+                  } mb-4`}
+                >
+                  Beyond academics, I'm an avid bouldering enthusiast and
+                  swimmer. I've played the piano and guitar for 5 years and
+                  occasionally create YouTube music videos. I hold a driver's
+                  license and a hygienepass.
                 </p>
-                <p className="mt-2 text-gray-700">
-                  Tukoke granted my Extended Essay in biology a shared 3rd rank
-                  within Finland, attaining a stipend from TEK of 600 euros.
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                <Link href="/about" passHref>
+                  <Button variant={darkMode ? "outline" : "secondary"}>
+                    Learn More About Me
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">Skills</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-2">
-              <Badge>Microsoft Office</Badge>
-              <Badge>Python</Badge>
-              <Badge>Data Analysis</Badge>
-              <Badge>Software Development</Badge>
-              <Badge>Machine Learning</Badge>
-              <Badge>Git</Badge>
-              <Badge>Artificial Intelligence</Badge>
-              <Badge>Data Science</Badge>
-              <Badge>Numpy</Badge>
-              <Badge>Pandas</Badge>
-            </div>
-          </CardContent>
-        </Card>
+          <motion.div
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
+          >
+            <Card
+              className={
+                darkMode
+                  ? "bg-gray-800 text-white"
+                  : "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg"
+              }
+            >
+              <CardContent className="p-6">
+                <h2 className="text-2xl font-semibold mb-4">
+                  Skills Highlight
+                </h2>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Badge variant={darkMode ? "outline" : "secondary"}>
+                    Python
+                  </Badge>
+                  <Badge variant={darkMode ? "outline" : "secondary"}>
+                    Data Analysis
+                  </Badge>
+                  <Badge variant={darkMode ? "outline" : "secondary"}>
+                    Machine Learning
+                  </Badge>
+                  <Badge variant={darkMode ? "outline" : "secondary"}>
+                    Artificial Intelligence
+                  </Badge>
+                  <Badge variant={darkMode ? "outline" : "secondary"}>
+                    Data Science
+                  </Badge>
+                  <Badge variant={darkMode ? "outline" : "secondary"}>
+                    Leadership
+                  </Badge>
+                  <Badge variant={darkMode ? "outline" : "secondary"}>
+                    Event Organization
+                  </Badge>
+                  <Badge variant={darkMode ? "outline" : "secondary"}>
+                    Public Speaking
+                  </Badge>
+                </div>
+                <Link href="/skills" passHref>
+                  <Button variant={darkMode ? "outline" : "secondary"}>
+                    View All Skills
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100, delay: 0.3 }}
+        >
+          <Card
+            className={`mb-16 ${
+              darkMode
+                ? "bg-gray-800 text-white"
+                : "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg"
+            }`}
+          >
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-semibold mb-4">
+                Featured Experience
+              </h2>
+              <ul className="space-y-4">
+                <li>
+                  <h3 className="text-lg font-semibold">
+                    Tenant Committee Chair
+                  </h3>
+                  <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
+                    HOAS | Helsinki, Finland
+                  </p>
+                </li>
+                <li>
+                  <h3 className="text-lg font-semibold">Senior Producer</h3>
+                  <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
+                    Kumpulan Speksi | Helsinki, Finland
+                  </p>
+                </li>
+                <li>
+                  <h3 className="text-lg font-semibold">
+                    F2F Fundraising as a Travelling Salesman
+                  </h3>
+                  <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
+                    Pelastakaa Lapset | Helsinki, Finland
+                  </p>
+                </li>
+              </ul>
+              <Link href="/experience" passHref>
+                <Button
+                  variant={darkMode ? "outline" : "secondary"}
+                  className="mt-4"
+                >
+                  View Full Experience
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <motion.footer
+          className="text-center"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100, delay: 0.4 }}
+        >
+          <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
+          <div className="flex justify-center space-x-4">
+            <Button
+              variant={darkMode ? "outline" : "secondary"}
+              size="icon"
+              asChild
+            >
+              <a href="mailto:christienetto@gmail.com" aria-label="Email">
+                <Mail className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button
+              variant={darkMode ? "outline" : "secondary"}
+              size="icon"
+              asChild
+            >
+              <a href="tel:+358442363773" aria-label="Phone">
+                <Phone className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button
+              variant={darkMode ? "outline" : "secondary"}
+              size="icon"
+              asChild
+            >
+              <a
+                href="https://github.com/christienetto"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+              >
+                <Github className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button
+              variant={darkMode ? "outline" : "secondary"}
+              size="icon"
+              asChild
+            >
+              <a
+                href="https://www.linkedin.com/in/christie-netto-a50765318"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        </motion.footer>
       </div>
+
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={i}
+          className={`absolute w-3 h-3 rounded-full z-0 ${
+            darkMode ? "bg-gray-600" : "bg-white"
+          }`}
+          initial={{
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+          }}
+          animate={{
+            y: [0, -20, 0],
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: Math.random() * 2 + 1,
+            repeat: Infinity,
+            repeatType: "loop",
+            delay: Math.random() * 2,
+          }}
+        />
+      ))}
     </div>
   );
 }
