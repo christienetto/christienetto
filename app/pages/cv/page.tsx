@@ -130,7 +130,7 @@ export default function CVPage() {
                   darkMode ? "text-gray-300" : "text-gray-800"
                 } mb-4`}
               >
-                I'm a passionate Computer and Data Science student at the
+                Im a passionate Computer and Data Science student at the
                 University of Helsinki, eagerly seeking new opportunities. I
                 thrive in leadership roles, taking on responsibilities and
                 delivering excellent results as part of a team.
@@ -140,9 +140,9 @@ export default function CVPage() {
                   darkMode ? "text-gray-300" : "text-gray-800"
                 } mb-4`}
               >
-                Beyond academics, I'm an avid bouldering enthusiast and swimmer.
-                I've played the piano and guitar for 5 years and occasionally
-                create YouTube music videos. I hold a driver's license and a
+                Beyond academics, Im an avid bouldering enthusiast and swimmer.
+                Ive played the piano and guitar for 5 years and occasionally
+                create YouTube music videos. I hold a drivers license and a
                 hygienepass.
               </p>
               <button
