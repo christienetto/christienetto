@@ -4,10 +4,5 @@ export default function ProjectsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <section>
-      <nav>/* Your CV-specific navigation */</nav>
-      {children}
-    </section>
-  );
+  return <section>{children}</section>;
 }
