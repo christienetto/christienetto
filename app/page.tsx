@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Ensure this is a client-side only component
 
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -9,6 +9,7 @@ export default function Component() {
   const [isHoveringCV, setIsHoveringCV] = useState(false);
   const [isHoveringProjects, setIsHoveringProjects] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [randomPositions, setRandomPositions] = useState([]);
 
   useEffect(() => {
     const isDarkMode = localStorage.getItem("darkMode") === "true";
@@ -23,6 +24,15 @@ export default function Component() {
       document.documentElement.classList.remove("dark");
     }
   }, [darkMode]);
+
+  useEffect(() => {
+    // Generate random positions only on the client-side (after rendering)
+    const positions = [...Array(20)].map(() => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+    }));
+    setRandomPositions(positions);
+  }, []); // Empty dependency array ensures this runs only once, on mount
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -174,16 +184,13 @@ export default function Component() {
         )}
       </motion.button>
 
-      {[...Array(20)].map((_, i) => (
+      {randomPositions.map((pos, i) => (
         <motion.div
           key={i}
           className={`absolute w-3 h-3 rounded-full z-0 ${
             darkMode ? "bg-gray-600" : "bg-white"
           }`}
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
+          style={{ left: pos.x, top: pos.y }}
           animate={{
             y: [0, -20, 0],
             opacity: [0, 1, 0],

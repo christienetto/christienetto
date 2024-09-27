@@ -1,4 +1,4 @@
-"use client";
+"use client"; // This ensures that the page is only rendered on the client side.
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
