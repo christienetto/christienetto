@@ -9,24 +9,30 @@ export default function HomePage() {
   const [isHoveringCV, setIsHoveringCV] = useState(false);
   const [isHoveringProjects, setIsHoveringProjects] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const isDarkMode = localStorage.getItem("darkMode") === "true";
     setDarkMode(isDarkMode);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("darkMode", darkMode.toString());
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
+    if (mounted) {
+      localStorage.setItem("darkMode", darkMode.toString());
+      if (darkMode) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
     }
-  }, [darkMode]);
+  }, [darkMode, mounted]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
+
+  if (!mounted) return null;
 
   return (
     <div
@@ -71,7 +77,7 @@ export default function HomePage() {
           onHoverStart={() => setIsHoveringCV(true)}
           onHoverEnd={() => setIsHoveringCV(false)}
         >
-          <Link href="/pages/cv">
+          <Link href="./cv">
             <div
               className={`backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg cursor-pointer ${
                 darkMode
@@ -174,28 +180,33 @@ export default function HomePage() {
         )}
       </motion.button>
 
-      {[...Array(20)].map((_, i) => (
-        <motion.div
-          key={i}
-          className={`absolute w-3 h-3 rounded-full z-0 ${
-            darkMode ? "bg-gray-600" : "bg-white"
-          }`}
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: Math.random() * 2 + 1,
-            repeat: Infinity,
-            repeatType: "loop",
-            delay: Math.random() * 2,
-          }}
-        />
-      ))}
+      {mounted &&
+        [...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-3 h-3 rounded-full z-0 ${
+              darkMode ? "bg-gray-600" : "bg-white"
+            }`}
+            initial={{
+              x:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerWidth : 1000),
+              y:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerHeight : 1000),
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 2 + 1,
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
     </div>
   );
 }

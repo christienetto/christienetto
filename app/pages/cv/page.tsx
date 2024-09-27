@@ -16,24 +16,30 @@ import {
 
 export default function CVPage() {
   const [darkMode, setDarkMode] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const isDarkMode = localStorage.getItem("darkMode") === "true";
     setDarkMode(isDarkMode);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("darkMode", darkMode.toString());
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
+    if (mounted) {
+      localStorage.setItem("darkMode", darkMode.toString());
+      if (darkMode) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
     }
-  }, [darkMode]);
+  }, [darkMode, mounted]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
+
+  if (!mounted) return null;
 
   return (
     <div
@@ -76,7 +82,7 @@ export default function CVPage() {
         )}
       </motion.button>
 
-      <Link href="/">
+      <Link href="./">
         <motion.button
           className={`fixed top-4 left-4 p-2 rounded-full z-20 ${
             darkMode ? "bg-gray-700" : "bg-white bg-opacity-20"
@@ -124,7 +130,7 @@ export default function CVPage() {
                   darkMode ? "text-gray-300" : "text-gray-800"
                 } mb-4`}
               >
-                Im a passionate Computer and Data Science student at the
+                I'm a passionate Computer and Data Science student at the
                 University of Helsinki, eagerly seeking new opportunities. I
                 thrive in leadership roles, taking on responsibilities and
                 delivering excellent results as part of a team.
@@ -134,9 +140,9 @@ export default function CVPage() {
                   darkMode ? "text-gray-300" : "text-gray-800"
                 } mb-4`}
               >
-                Beyond academics, Im an avid bouldering enthusiast and swimmer.
-                Ive played the piano and guitar for 5 years and occasionally
-                create YouTube music videos. I hold a drivers license and a
+                Beyond academics, I'm an avid bouldering enthusiast and swimmer.
+                I've played the piano and guitar for 5 years and occasionally
+                create YouTube music videos. I hold a driver's license and a
                 hygienepass.
               </p>
               <button
@@ -301,28 +307,33 @@ export default function CVPage() {
         </motion.footer>
       </div>
 
-      {[...Array(20)].map((_, i) => (
-        <motion.div
-          key={i}
-          className={`absolute w-3 h-3 rounded-full z-0 ${
-            darkMode ? "bg-gray-600" : "bg-white"
-          }`}
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: Math.random() * 2 + 1,
-            repeat: Infinity,
-            repeatType: "loop",
-            delay: Math.random() * 2,
-          }}
-        />
-      ))}
+      {mounted &&
+        [...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-3 h-3 rounded-full z-0 ${
+              darkMode ? "bg-gray-600" : "bg-white"
+            }`}
+            initial={{
+              x:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerWidth : 1000),
+              y:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerHeight : 1000),
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 2 + 1,
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
     </div>
   );
 }
