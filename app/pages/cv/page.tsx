@@ -82,7 +82,7 @@ export default function CVPage() {
         )}
       </motion.button>
 
-      <Link href="./">
+      <Link href="/">
         <motion.button
           className={`fixed top-4 left-4 p-2 rounded-full z-20 ${
             darkMode ? "bg-gray-700" : "bg-white bg-opacity-20"

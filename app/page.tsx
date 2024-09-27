@@ -77,7 +77,7 @@ export default function HomePage() {
           onHoverStart={() => setIsHoveringCV(true)}
           onHoverEnd={() => setIsHoveringCV(false)}
         >
-          <Link href="./cv">
+          <Link href="/pages/cv">
             <div
               className={`backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg cursor-pointer ${
                 darkMode
