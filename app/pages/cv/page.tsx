@@ -1,11 +1,8 @@
-"use client"; // This ensures that the page is only rendered on the client side.
+"use client";
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Github,
   Linkedin,
@@ -14,6 +11,7 @@ import {
   ChevronRight,
   Sun,
   Moon,
+  Home,
 } from "lucide-react";
 
 export default function CVPage() {
@@ -78,6 +76,18 @@ export default function CVPage() {
         )}
       </motion.button>
 
+      <Link href="/">
+        <motion.button
+          className={`fixed top-4 left-4 p-2 rounded-full z-20 ${
+            darkMode ? "bg-gray-700" : "bg-white bg-opacity-20"
+          }`}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <Home className={darkMode ? "text-white" : "text-gray-800"} />
+        </motion.button>
+      </Link>
+
       <div className="container mx-auto px-4 py-16 z-10">
         <motion.header
           className="text-center mb-16"
@@ -101,43 +111,45 @@ export default function CVPage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 100, delay: 0.1 }}
           >
-            <Card
-              className={
+            <div
+              className={`rounded-lg shadow-lg p-6 ${
                 darkMode
                   ? "bg-gray-800 text-white"
                   : "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg"
-              }
+              }`}
             >
-              <CardContent className="p-6">
-                <h2 className="text-2xl font-semibold mb-4">About Me</h2>
-                <p
-                  className={`${
-                    darkMode ? "text-gray-300" : "text-gray-800"
-                  } mb-4`}
-                >
-                  Im a passionate Computer and Data Science student at the
-                  University of Helsinki, eagerly seeking new opportunities. I
-                  thrive in leadership roles, taking on responsibilities and
-                  delivering excellent results as part of a team.
-                </p>
-                <p
-                  className={`${
-                    darkMode ? "text-gray-300" : "text-gray-800"
-                  } mb-4`}
-                >
-                  Beyond academics, Im an avid bouldering enthusiast and
-                  swimmer. Ive played the piano and guitar for 5 years and
-                  occasionally create YouTube music videos. I hold a drivers
-                  license and a hygienepass.
-                </p>
-                <Link href="/about" passHref>
-                  <Button variant={darkMode ? "outline" : "secondary"}>
-                    Learn More About Me
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+              <h2 className="text-2xl font-semibold mb-4">About Me</h2>
+              <p
+                className={`${
+                  darkMode ? "text-gray-300" : "text-gray-800"
+                } mb-4`}
+              >
+                I'm a passionate Computer and Data Science student at the
+                University of Helsinki, eagerly seeking new opportunities. I
+                thrive in leadership roles, taking on responsibilities and
+                delivering excellent results as part of a team.
+              </p>
+              <p
+                className={`${
+                  darkMode ? "text-gray-300" : "text-gray-800"
+                } mb-4`}
+              >
+                Beyond academics, I'm an avid bouldering enthusiast and swimmer.
+                I've played the piano and guitar for 5 years and occasionally
+                create YouTube music videos. I hold a driver's license and a
+                hygienepass.
+              </p>
+              <button
+                className={`px-4 py-2 rounded ${
+                  darkMode
+                    ? "bg-blue-600 hover:bg-blue-700"
+                    : "bg-pink-500 hover:bg-pink-600"
+                } text-white transition-colors duration-300`}
+              >
+                Learn More About Me
+                <ChevronRight className="inline-block ml-2 h-4 w-4" />
+              </button>
+            </div>
           </motion.div>
 
           <motion.div
@@ -145,51 +157,48 @@ export default function CVPage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
           >
-            <Card
-              className={
+            <div
+              className={`rounded-lg shadow-lg p-6 ${
                 darkMode
                   ? "bg-gray-800 text-white"
                   : "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg"
-              }
+              }`}
             >
-              <CardContent className="p-6">
-                <h2 className="text-2xl font-semibold mb-4">
-                  Skills Highlight
-                </h2>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge variant={darkMode ? "outline" : "secondary"}>
-                    Python
-                  </Badge>
-                  <Badge variant={darkMode ? "outline" : "secondary"}>
-                    Data Analysis
-                  </Badge>
-                  <Badge variant={darkMode ? "outline" : "secondary"}>
-                    Machine Learning
-                  </Badge>
-                  <Badge variant={darkMode ? "outline" : "secondary"}>
-                    Artificial Intelligence
-                  </Badge>
-                  <Badge variant={darkMode ? "outline" : "secondary"}>
-                    Data Science
-                  </Badge>
-                  <Badge variant={darkMode ? "outline" : "secondary"}>
-                    Leadership
-                  </Badge>
-                  <Badge variant={darkMode ? "outline" : "secondary"}>
-                    Event Organization
-                  </Badge>
-                  <Badge variant={darkMode ? "outline" : "secondary"}>
-                    Public Speaking
-                  </Badge>
-                </div>
-                <Link href="/skills" passHref>
-                  <Button variant={darkMode ? "outline" : "secondary"}>
-                    View All Skills
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+              <h2 className="text-2xl font-semibold mb-4">Skills Highlight</h2>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {[
+                  "Python",
+                  "Data Analysis",
+                  "Machine Learning",
+                  "Artificial Intelligence",
+                  "Data Science",
+                  "Leadership",
+                  "Event Organization",
+                  "Public Speaking",
+                ].map((skill) => (
+                  <span
+                    key={skill}
+                    className={`px-2 py-1 rounded ${
+                      darkMode
+                        ? "bg-gray-700 text-white"
+                        : "bg-pink-200 text-gray-800"
+                    }`}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+              <button
+                className={`px-4 py-2 rounded ${
+                  darkMode
+                    ? "bg-blue-600 hover:bg-blue-700"
+                    : "bg-pink-500 hover:bg-pink-600"
+                } text-white transition-colors duration-300`}
+              >
+                View All Skills
+                <ChevronRight className="inline-block ml-2 h-4 w-4" />
+              </button>
+            </div>
           </motion.div>
         </div>
 
@@ -198,52 +207,49 @@ export default function CVPage() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 100, delay: 0.3 }}
         >
-          <Card
-            className={`mb-16 ${
+          <div
+            className={`rounded-lg shadow-lg p-6 mb-16 ${
               darkMode
                 ? "bg-gray-800 text-white"
                 : "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg"
             }`}
           >
-            <CardContent className="p-6">
-              <h2 className="text-2xl font-semibold mb-4">
-                Featured Experience
-              </h2>
-              <ul className="space-y-4">
-                <li>
-                  <h3 className="text-lg font-semibold">
-                    Tenant Committee Chair
-                  </h3>
-                  <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
-                    HOAS | Helsinki, Finland
-                  </p>
-                </li>
-                <li>
-                  <h3 className="text-lg font-semibold">Senior Producer</h3>
-                  <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
-                    Kumpulan Speksi | Helsinki, Finland
-                  </p>
-                </li>
-                <li>
-                  <h3 className="text-lg font-semibold">
-                    F2F Fundraising as a Travelling Salesman
-                  </h3>
-                  <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
-                    Pelastakaa Lapset | Helsinki, Finland
-                  </p>
-                </li>
-              </ul>
-              <Link href="/experience" passHref>
-                <Button
-                  variant={darkMode ? "outline" : "secondary"}
-                  className="mt-4"
-                >
-                  View Full Experience
-                  <ChevronRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
+            <h2 className="text-2xl font-semibold mb-4">Featured Experience</h2>
+            <ul className="space-y-4">
+              <li>
+                <h3 className="text-lg font-semibold">
+                  Tenant Committee Chair
+                </h3>
+                <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
+                  HOAS | Helsinki, Finland
+                </p>
+              </li>
+              <li>
+                <h3 className="text-lg font-semibold">Senior Producer</h3>
+                <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
+                  Kumpulan Speksi | Helsinki, Finland
+                </p>
+              </li>
+              <li>
+                <h3 className="text-lg font-semibold">
+                  F2F Fundraising as a Travelling Salesman
+                </h3>
+                <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
+                  Pelastakaa Lapset | Helsinki, Finland
+                </p>
+              </li>
+            </ul>
+            <button
+              className={`px-4 py-2 rounded mt-4 ${
+                darkMode
+                  ? "bg-blue-600 hover:bg-blue-700"
+                  : "bg-pink-500 hover:bg-pink-600"
+              } text-white transition-colors duration-300`}
+            >
+              View Full Experience
+              <ChevronRight className="inline-block ml-2 h-4 w-4" />
+            </button>
+          </div>
         </motion.div>
 
         <motion.footer
@@ -254,52 +260,43 @@ export default function CVPage() {
         >
           <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
           <div className="flex justify-center space-x-4">
-            <Button
-              variant={darkMode ? "outline" : "secondary"}
-              size="icon"
-              asChild
-            >
-              <a href="mailto:christienetto@gmail.com" aria-label="Email">
-                <Mail className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button
-              variant={darkMode ? "outline" : "secondary"}
-              size="icon"
-              asChild
-            >
-              <a href="tel:+358442363773" aria-label="Phone">
-                <Phone className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button
-              variant={darkMode ? "outline" : "secondary"}
-              size="icon"
-              asChild
-            >
+            {[
+              {
+                href: "mailto:christienetto@gmail.com",
+                icon: Mail,
+                label: "Email",
+              },
+              { href: "tel:+358442363773", icon: Phone, label: "Phone" },
+              {
+                href: "https://github.com/christienetto",
+                icon: Github,
+                label: "GitHub",
+              },
+              {
+                href: "https://www.linkedin.com/in/christie-netto-a50765318",
+                icon: Linkedin,
+                label: "LinkedIn",
+              },
+            ].map(({ href, icon: Icon, label }) => (
               <a
-                href="https://github.com/christienetto"
+                key={label}
+                href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub"
+                aria-label={label}
+                className={`p-2 rounded-full ${
+                  darkMode
+                    ? "bg-gray-700 hover:bg-gray-600"
+                    : "bg-pink-200 hover:bg-pink-300"
+                } transition-colors duration-300`}
               >
-                <Github className="h-4 w-4" />
+                <Icon
+                  className={`h-6 w-6 ${
+                    darkMode ? "text-white" : "text-gray-800"
+                  }`}
+                />
               </a>
-            </Button>
-            <Button
-              variant={darkMode ? "outline" : "secondary"}
-              size="icon"
-              asChild
-            >
-              <a
-                href="https://www.linkedin.com/in/christie-netto-a50765318"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-4 w-4" />
-              </a>
-            </Button>
+            ))}
           </div>
         </motion.footer>
       </div>

@@ -1,15 +1,14 @@
-"use client"; // Ensure this is a client-side only component
+"use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { Sparkles, Sun, Moon } from "lucide-react";
 
-export default function Component() {
+export default function HomePage() {
   const [isHoveringCV, setIsHoveringCV] = useState(false);
   const [isHoveringProjects, setIsHoveringProjects] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const [randomPositions, setRandomPositions] = useState([]);
 
   useEffect(() => {
     const isDarkMode = localStorage.getItem("darkMode") === "true";
@@ -24,15 +23,6 @@ export default function Component() {
       document.documentElement.classList.remove("dark");
     }
   }, [darkMode]);
-
-  useEffect(() => {
-    // Generate random positions only on the client-side (after rendering)
-    const positions = [...Array(20)].map(() => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-    }));
-    setRandomPositions(positions);
-  }, []); // Empty dependency array ensures this runs only once, on mount
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -117,7 +107,7 @@ export default function Component() {
           onHoverStart={() => setIsHoveringProjects(true)}
           onHoverEnd={() => setIsHoveringProjects(false)}
         >
-          <Link href="/projects">
+          <Link href="./projects">
             <div
               className={`backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg cursor-pointer ${
                 darkMode
@@ -184,13 +174,16 @@ export default function Component() {
         )}
       </motion.button>
 
-      {randomPositions.map((pos, i) => (
+      {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
           className={`absolute w-3 h-3 rounded-full z-0 ${
             darkMode ? "bg-gray-600" : "bg-white"
           }`}
-          style={{ left: pos.x, top: pos.y }}
+          initial={{
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+          }}
           animate={{
             y: [0, -20, 0],
             opacity: [0, 1, 0],
