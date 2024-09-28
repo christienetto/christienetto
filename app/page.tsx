@@ -113,7 +113,7 @@ export default function HomePage() {
           onHoverStart={() => setIsHoveringProjects(true)}
           onHoverEnd={() => setIsHoveringProjects(false)}
         >
-          <Link href="./projects">
+          <Link href="/pages/projects">
             <div
               className={`backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg cursor-pointer ${
                 darkMode
