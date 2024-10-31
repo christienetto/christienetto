@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Add this line at the top
 
 import { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
@@ -32,6 +32,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       className={`backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg cursor-pointer ${color} text-white`}
       whileHover={{ scale: 1.05, rotate: [0, -2, 2, -2, 0] }}
       whileTap={{ scale: 0.95 }}
+      onClick={() => {
+        if (title === "Music App") {
+          window.location.href = "https://github.com/christienetto/MusicGo";
+        } else if (title === "Suomenlinna Traffic Predictor") {
+          window.location.href =
+            "https://github.com/christienetto/HSL-Suomenlinna-Traffic-Predictor";
+        }
+      }}
     >
       <motion.div animate={controls}>
         <Icon className="w-12 h-12 mb-4" />
@@ -109,7 +117,7 @@ export default function ProjectsPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 z-10 max-w-6xl">
         <ProjectCard
           title="Music App"
-          description="An innovative music player with AI-powered recommendations"
+          description="Developed an IOS app which is an easily deployable self-hosted music player app on Linux using Expo Go, Ngrok, and Golang!"
           icon={Music}
           color="bg-blue-500"
         />
@@ -121,7 +129,7 @@ export default function ProjectsPage() {
         />
         <ProjectCard
           title="Suomenlinna Traffic Predictor"
-          description="AI-powered app predicting ferry traffic based on weather and historical data"
+          description="Machine Learning-powered app predicting ferry traffic based on weather and historical data. UI generated with Poetry and Tkinter"
           icon={Ship}
           color="bg-yellow-500"
         />
@@ -138,22 +146,32 @@ export default function ProjectsPage() {
             darkMode ? "text-white" : "text-white"
           }`}
         >
-          Technologies Used
+          Other Technologies Used
         </h3>
         <div className="flex flex-wrap justify-center gap-4">
-          {["React", "Node.js", "Python", "TensorFlow", "MongoDB", "WebGL"].map(
-            (tech) => (
-              <motion.span
-                key={tech}
-                className={`px-3 py-1 rounded-full ${
-                  darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
-                }`}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-              >
-                {tech}
-              </motion.span>
-            )
-          )}
+          {[
+            "React",
+            "Node.js",
+            "Python",
+            "TensorFlow",
+            "MongoDB",
+            "WebGL",
+            "Firebase",
+            "Svelte",
+            "Git",
+            "R",
+            "SQL",
+          ].map((tech) => (
+            <motion.span
+              key={tech}
+              className={`px-3 py-1 rounded-full ${
+                darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
+              }`}
+              whileHover={{ scale: 1.1, rotate: 5 }}
+            >
+              {tech}
+            </motion.span>
+          ))}
         </div>
       </motion.div>
 
