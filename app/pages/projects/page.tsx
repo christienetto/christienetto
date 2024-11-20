@@ -3,7 +3,16 @@
 import { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
-import { Sun, Moon, Home, Music, Dice1, Ship } from "lucide-react";
+import {
+  Sun,
+  Moon,
+  Home,
+  Music,
+  Dice1,
+  Ship,
+  Terminal,
+  Cpu,
+} from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
@@ -38,6 +47,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         } else if (title === "Suomenlinna Traffic Predictor") {
           window.location.href =
             "https://github.com/christienetto/HSL-Suomenlinna-Traffic-Predictor";
+        } else if (title === "mpvssh") {
+          window.location.href = "https://github.com/christienetto/mpvssh";
+        } else if (title === "Machine Learning") {
+          window.location.href =
+            "https://github.com/christienetto/machine-learning";
         }
       }}
     >
@@ -132,6 +146,18 @@ export default function ProjectsPage() {
           description="Machine Learning-powered app predicting ferry traffic based on weather and historical data. UI generated with Poetry and Tkinter"
           icon={Ship}
           color="bg-yellow-500"
+        />
+        <ProjectCard
+          title="mpvssh"
+          description="A secure, SSH-based media player for remote control of MPV media player instances"
+          icon={Terminal}
+          color="bg-indigo-500"
+        />
+        <ProjectCard
+          title="Machine Learning"
+          description="A collection of various machine learning projects, including deep learning models, data preprocessing, and training"
+          icon={Cpu}
+          color="bg-teal-500"
         />
       </div>
 
