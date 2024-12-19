@@ -38,7 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <motion.div
-      className={backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg cursor-pointer ${color} text-white}
+      className={`backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg cursor-pointer ${color} text-white`}
       whileHover={{ scale: 1.05, rotate: [0, -2, 2, -2, 0] }}
       whileTap={{ scale: 0.95 }}
       onClick={() => {
@@ -93,11 +93,11 @@ export default function ProjectsPage() {
 
   return (
     <div
-      className={min-h-screen flex flex-col items-center justify-start p-4 overflow-hidden transition-colors duration-500 ${
+      className={`min-h-screen flex flex-col items-center justify-start p-4 overflow-hidden transition-colors duration-500 ${
         darkMode
           ? "bg-gray-900"
           : "bg-gradient-to-br from-purple-400 via-pink-500 to-red-500"
-      }}
+      }`}
     >
       <motion.div
         className="absolute inset-0 z-0"
@@ -118,9 +118,9 @@ export default function ProjectsPage() {
       />
 
       <motion.header
-        className={text-4xl font-bold mb-12 z-10 ${
+        className={`text-4xl font-bold mb-12 z-10 ${
           darkMode ? "text-white" : "text-white"
-        }}
+        }`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100 }}
@@ -168,9 +168,9 @@ export default function ProjectsPage() {
         transition={{ delay: 0.5 }}
       >
         <h3
-          className={text-2xl font-semibold mb-4 ${
+          className={`text-2xl font-semibold mb-4 ${
             darkMode ? "text-white" : "text-white"
-          }}
+          }`}
         >
           Other Technologies Used
         </h3>
@@ -190,9 +190,9 @@ export default function ProjectsPage() {
           ].map((tech) => (
             <motion.span
               key={tech}
-              className={px-3 py-1 rounded-full ${
+              className={`px-3 py-1 rounded-full ${
                 darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
-              }}
+              }`}
               whileHover={{ scale: 1.1, rotate: 5 }}
             >
               {tech}
@@ -203,9 +203,9 @@ export default function ProjectsPage() {
 
       <Link href="/">
         <motion.button
-          className={fixed top-4 left-4 p-2 rounded-full z-20 ${
+          className={`fixed top-4 left-4 p-2 rounded-full z-20 ${
             darkMode ? "bg-gray-700" : "bg-white bg-opacity-20"
-          }}
+          }`}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -214,9 +214,9 @@ export default function ProjectsPage() {
       </Link>
 
       <motion.button
-        className={fixed top-4 right-4 p-2 rounded-full z-20 ${
+        className={`fixed top-4 right-4 p-2 rounded-full z-20 ${
           darkMode ? "bg-gray-700" : "bg-white bg-opacity-20"
-        }}
+        }`}
         onClick={toggleDarkMode}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
@@ -232,9 +232,9 @@ export default function ProjectsPage() {
         [...Array(30)].map((_, i) => (
           <motion.div
             key={i}
-            className={absolute w-3 h-3 rounded-full z-0 ${
+            className={`absolute w-3 h-3 rounded-full z-0 ${
               darkMode ? "bg-gray-600" : "bg-white"
-            }}
+            }`}
             initial={{
               x:
                 Math.random() *
