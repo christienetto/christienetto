@@ -3,7 +3,16 @@
 import { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
-import { Sun, Moon, Home, Music, Ship, Terminal, Cpu } from "lucide-react";
+import {
+  Sun,
+  Moon,
+  Home,
+  Music,
+  Dice1,
+  Ship,
+  Terminal,
+  Cpu,
+} from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
@@ -29,18 +38,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <motion.div
-      className={`backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg cursor-pointer ${color} text-white`}
+      className={backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg cursor-pointer ${color} text-white}
       whileHover={{ scale: 1.05, rotate: [0, -2, 2, -2, 0] }}
       whileTap={{ scale: 0.95 }}
       onClick={() => {
         if (title === "Music App") {
           window.location.href = "https://github.com/christienetto/MusicGo";
         } else if (title === "Suomenlinna Traffic Predictor") {
-          window.location.href = "https://github.com/christienetto/HSL-Suomenlinna-Traffic-Predictor";
+          window.location.href =
+            "https://github.com/christienetto/HSL-Suomenlinna-Traffic-Predictor";
         } else if (title === "mpvssh") {
           window.location.href = "https://github.com/christienetto/mpvssh";
         } else if (title === "Machine Learning") {
-          window.location.href = "https://github.com/christienetto/machine-learning";
+          window.location.href =
+            "https://github.com/christienetto/machine-learning";
         }
       }}
     >
@@ -82,11 +93,11 @@ export default function ProjectsPage() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col items-center justify-start p-4 overflow-hidden transition-colors duration-500 ${
+      className={min-h-screen flex flex-col items-center justify-start p-4 overflow-hidden transition-colors duration-500 ${
         darkMode
           ? "bg-gray-900"
           : "bg-gradient-to-br from-purple-400 via-pink-500 to-red-500"
-      }`}
+      }}
     >
       <motion.div
         className="absolute inset-0 z-0"
@@ -107,9 +118,9 @@ export default function ProjectsPage() {
       />
 
       <motion.header
-        className={`text-4xl font-bold mb-12 z-10 ${
+        className={text-4xl font-bold mb-12 z-10 ${
           darkMode ? "text-white" : "text-white"
-        }`}
+        }}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100 }}
@@ -123,6 +134,12 @@ export default function ProjectsPage() {
           description="Developed an IOS app which is an easily deployable self-hosted music player app on Linux using Expo Go, Ngrok, and Golang!"
           icon={Music}
           color="bg-blue-500"
+        />
+        <ProjectCard
+          title="Monopoly App"
+          description="A digital version of the classic board game with online multiplayer"
+          icon={Dice1}
+          color="bg-green-500"
         />
         <ProjectCard
           title="Suomenlinna Traffic Predictor"
@@ -143,6 +160,106 @@ export default function ProjectsPage() {
           color="bg-teal-500"
         />
       </div>
+
+      <motion.div
+        className="mt-16 z-10"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
+        <h3
+          className={text-2xl font-semibold mb-4 ${
+            darkMode ? "text-white" : "text-white"
+          }}
+        >
+          Other Technologies Used
+        </h3>
+        <div className="flex flex-wrap justify-center gap-4">
+          {[
+            "React",
+            "Node.js",
+            "Python",
+            "TensorFlow",
+            "MongoDB",
+            "WebGL",
+            "Firebase",
+            "Svelte",
+            "Git",
+            "R",
+            "SQL",
+          ].map((tech) => (
+            <motion.span
+              key={tech}
+              className={px-3 py-1 rounded-full ${
+                darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
+              }}
+              whileHover={{ scale: 1.1, rotate: 5 }}
+            >
+              {tech}
+            </motion.span>
+          ))}
+        </div>
+      </motion.div>
+
+      <Link href="/">
+        <motion.button
+          className={fixed top-4 left-4 p-2 rounded-full z-20 ${
+            darkMode ? "bg-gray-700" : "bg-white bg-opacity-20"
+          }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <Home className={darkMode ? "text-white" : "text-gray-800"} />
+        </motion.button>
+      </Link>
+
+      <motion.button
+        className={fixed top-4 right-4 p-2 rounded-full z-20 ${
+          darkMode ? "bg-gray-700" : "bg-white bg-opacity-20"
+        }}
+        onClick={toggleDarkMode}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        {darkMode ? (
+          <Sun className="text-yellow-300" />
+        ) : (
+          <Moon className="text-gray-800" />
+        )}
+      </motion.button>
+
+      {mounted &&
+        [...Array(30)].map((_, i) => (
+          <motion.div
+            key={i}
+            className={absolute w-3 h-3 rounded-full z-0 ${
+              darkMode ? "bg-gray-600" : "bg-white"
+            }}
+            initial={{
+              x:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerWidth : 1000),
+              y:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerHeight : 1000),
+            }}
+            animate={{
+              x:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerWidth : 1000),
+              y:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerHeight : 1000),
+              scale: [1, 1.5, 1],
+              opacity: [0.2, 1, 0.2],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+        ))}
     </div>
   );
 }
