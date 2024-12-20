@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Add this line at the top
 
 import { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
@@ -45,11 +45,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         if (title === "Music App") {
           window.location.href = "https://github.com/christienetto/MusicGo";
         } else if (title === "Suomenlinna Traffic Predictor") {
-          window.location.href = "https://github.com/christienetto/HSL-Suomenlinna-Traffic-Predictor";
+          window.location.href =
+            "https://github.com/christienetto/HSL-Suomenlinna-Traffic-Predictor";
         } else if (title === "mpvssh") {
           window.location.href = "https://github.com/christienetto/mpvssh";
         } else if (title === "Machine Learning") {
-          window.location.href = "https://github.com/christienetto/machine-learning";
+          window.location.href =
+            "https://github.com/christienetto/machine-learning";
         }
       }}
     >
@@ -134,6 +136,12 @@ export default function ProjectsPage() {
           color="bg-blue-500"
         />
         <ProjectCard
+          title="Monopoly App"
+          description="A digital version of the classic board game with online multiplayer"
+          icon={Dice1}
+          color="bg-green-500"
+        />
+        <ProjectCard
           title="Suomenlinna Traffic Predictor"
           description="Machine Learning-powered app predicting ferry traffic based on weather and historical data. UI generated with Poetry and Tkinter"
           icon={Ship}
@@ -152,6 +160,106 @@ export default function ProjectsPage() {
           color="bg-teal-500"
         />
       </div>
+
+      <motion.div
+        className="mt-16 z-10"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
+        <h3
+          className={`text-2xl font-semibold mb-4 ${
+            darkMode ? "text-white" : "text-white"
+          }`}
+        >
+          Other Technologies Used
+        </h3>
+        <div className="flex flex-wrap justify-center gap-4">
+          {[
+            "React",
+            "Node.js",
+            "Python",
+            "TensorFlow",
+            "MongoDB",
+            "WebGL",
+            "Firebase",
+            "Svelte",
+            "Git",
+            "R",
+            "SQL",
+          ].map((tech) => (
+            <motion.span
+              key={tech}
+              className={`px-3 py-1 rounded-full ${
+                darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
+              }`}
+              whileHover={{ scale: 1.1, rotate: 5 }}
+            >
+              {tech}
+            </motion.span>
+          ))}
+        </div>
+      </motion.div>
+
+      <Link href="/">
+        <motion.button
+          className={`fixed top-4 left-4 p-2 rounded-full z-20 ${
+            darkMode ? "bg-gray-700" : "bg-white bg-opacity-20"
+          }`}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <Home className={darkMode ? "text-white" : "text-gray-800"} />
+        </motion.button>
+      </Link>
+
+      <motion.button
+        className={`fixed top-4 right-4 p-2 rounded-full z-20 ${
+          darkMode ? "bg-gray-700" : "bg-white bg-opacity-20"
+        }`}
+        onClick={toggleDarkMode}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        {darkMode ? (
+          <Sun className="text-yellow-300" />
+        ) : (
+          <Moon className="text-gray-800" />
+        )}
+      </motion.button>
+
+      {mounted &&
+        [...Array(30)].map((_, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-3 h-3 rounded-full z-0 ${
+              darkMode ? "bg-gray-600" : "bg-white"
+            }`}
+            initial={{
+              x:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerWidth : 1000),
+              y:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerHeight : 1000),
+            }}
+            animate={{
+              x:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerWidth : 1000),
+              y:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerHeight : 1000),
+              scale: [1, 1.5, 1],
+              opacity: [0.2, 1, 0.2],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+        ))}
     </div>
   );
 }
