@@ -3,16 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
-import {
-  Sun,
-  Moon,
-  Home,
-  Music,
-  Dice1,
-  Ship,
-  Terminal,
-  Cpu,
-} from "lucide-react";
+import { Sun, Moon, Home, Music, Ship, Terminal, Cpu } from 'lucide-react';
 
 interface ProjectCardProps {
   title: string;
@@ -136,12 +127,6 @@ export default function ProjectsPage() {
           color="bg-blue-500"
         />
         <ProjectCard
-          title="Monopoly App"
-          description="A digital version of the classic board game with online multiplayer"
-          icon={Dice1}
-          color="bg-green-500"
-        />
-        <ProjectCard
           title="Suomenlinna Traffic Predictor"
           description="Machine Learning-powered app predicting ferry traffic based on weather and historical data. UI generated with Poetry and Tkinter"
           icon={Ship}
@@ -263,3 +248,4 @@ export default function ProjectsPage() {
     </div>
   );
 }
+
