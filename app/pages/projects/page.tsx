@@ -128,7 +128,15 @@ export default function ProjectsPage() {
         My Awesome Projects
       </motion.header>
 
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 z-10 max-w-6xl">
+
+      <ProjectCard
+          title="mpvssh"
+          description="A secure, SSH-based media player for remote control of MPV media player instances"
+          icon={Terminal}
+          color="bg-indigo-500"
+        />
         <ProjectCard
           title="Music App"
           description="Developed an IOS app which is an easily deployable self-hosted music player app on Linux using Expo Go, Ngrok, and Golang!"
@@ -136,22 +144,10 @@ export default function ProjectsPage() {
           color="bg-blue-500"
         />
         <ProjectCard
-          title="Monopoly App"
-          description="A digital version of the classic board game with online multiplayer"
-          icon={Dice1}
-          color="bg-green-500"
-        />
-        <ProjectCard
           title="Suomenlinna Traffic Predictor"
           description="Machine Learning-powered app predicting ferry traffic based on weather and historical data. UI generated with Poetry and Tkinter"
           icon={Ship}
           color="bg-yellow-500"
-        />
-        <ProjectCard
-          title="mpvssh"
-          description="A secure, SSH-based media player for remote control of MPV media player instances"
-          icon={Terminal}
-          color="bg-indigo-500"
         />
         <ProjectCard
           title="Machine Learning"
